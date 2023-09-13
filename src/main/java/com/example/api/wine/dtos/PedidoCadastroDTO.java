@@ -2,6 +2,7 @@ package com.example.api.wine.dtos;
 
 import java.time.LocalDate;
 
+import com.example.api.wine.dtos.usuarioDTO.UsuarioCadastroDTO;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 import jakarta.validation.Valid;

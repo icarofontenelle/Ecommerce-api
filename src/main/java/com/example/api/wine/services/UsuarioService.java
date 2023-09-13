@@ -8,9 +8,9 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Service;
 
-import com.example.api.wine.dtos.UsuarioAtualizarDTO;
-import com.example.api.wine.dtos.UsuarioCadastroDTO;
-import com.example.api.wine.dtos.UsuarioListagemDTO;
+import com.example.api.wine.dtos.usuarioDTO.UsuarioAtualizarDTO;
+import com.example.api.wine.dtos.usuarioDTO.UsuarioCadastroDTO;
+import com.example.api.wine.dtos.usuarioDTO.UsuarioListagemDTO;
 import com.example.api.wine.entities.Usuario;
 import com.example.api.wine.repositories.UsuarioRepository;
 
@@ -23,8 +23,9 @@ public class UsuarioService {
     private UsuarioRepository usuarioRepository;
 
     @Transactional
-    public void criarUsuario(UsuarioCadastroDTO usuarioCadastroDTO){
-        usuarioRepository.save(new Usuario(usuarioCadastroDTO));
+    public Usuario criarUsuario(UsuarioCadastroDTO usuarioCadastroDTO){
+        Usuario usuario = new Usuario(usuarioCadastroDTO);
+        return usuarioRepository.save(usuario);
     }
 
     public Page<UsuarioListagemDTO> listarUsuarios(@PageableDefault(size = 10, sort = {"nome"}) Pageable paginacao){
@@ -32,15 +33,19 @@ public class UsuarioService {
     }
 
     @Transactional
-    public void atualizarUsuario(UsuarioAtualizarDTO usuarioAtualizarDTO){
+    public Usuario atualizarUsuario(UsuarioAtualizarDTO usuarioAtualizarDTO){
         var usuario = usuarioRepository.getReferenceById(usuarioAtualizarDTO.id());
-        usuario.atualizarInformacoes(usuarioAtualizarDTO);    
+        usuario.atualizarInformacoes(usuarioAtualizarDTO);
+        return usuario;
     }
 
     @Transactional
     public void excluirUsuario(Long id){
         var usuario = usuarioRepository.getReferenceById(id);
         usuario.excluirInformacoes();
+    }
 
+    public Usuario detalharUsuario(Long id){
+        return usuarioRepository.findById(id).orElseThrow(() -> new RuntimeException("Usuário não encontrado"));
     }
 }

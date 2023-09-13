@@ -2,8 +2,8 @@ package com.example.api.wine.entities;
 
 import java.time.LocalDate;
 
-import com.example.api.wine.dtos.UsuarioAtualizarDTO;
-import com.example.api.wine.dtos.UsuarioCadastroDTO;
+import com.example.api.wine.dtos.usuarioDTO.UsuarioAtualizarDTO;
+import com.example.api.wine.dtos.usuarioDTO.UsuarioCadastroDTO;
 
 import jakarta.persistence.Embedded;
 import jakarta.persistence.Entity;

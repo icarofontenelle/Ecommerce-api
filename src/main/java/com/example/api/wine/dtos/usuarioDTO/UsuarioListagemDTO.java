@@ -1,4 +1,4 @@
-package com.example.api.wine.dtos;
+package com.example.api.wine.dtos.usuarioDTO;
 
 import com.example.api.wine.entities.Usuario;
 

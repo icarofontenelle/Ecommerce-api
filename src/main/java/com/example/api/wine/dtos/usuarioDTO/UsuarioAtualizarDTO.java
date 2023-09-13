@@ -1,4 +1,6 @@
-package com.example.api.wine.dtos;
+package com.example.api.wine.dtos.usuarioDTO;
+
+import com.example.api.wine.dtos.EnderecoCadastroDTO;
 
 import jakarta.validation.constraints.NotNull;
 
