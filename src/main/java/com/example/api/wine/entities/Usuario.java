@@ -7,6 +7,8 @@ import com.example.api.wine.dtos.usuarioDTO.UsuarioCadastroDTO;
 
 import jakarta.persistence.Embedded;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -42,12 +44,14 @@ public class Usuario {
     private String nome;
     private String sobrenome;
     private LocalDate nascimento;
-    private String role;
     private String email;
     private String senha;
     private String cpf;
 
     private Boolean ativo;
+
+    @Enumerated(EnumType.STRING)
+    private Role role;
 
     @Embedded
     Endereco endereco;
