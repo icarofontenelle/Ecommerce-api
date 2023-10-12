@@ -3,6 +3,8 @@ package com.example.api.wine.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -39,8 +41,8 @@ public class UsuarioController {
     } 
     
     @GetMapping
-    public ResponseEntity <Page<UsuarioListagemDTO>> listar(){
-        var page = usuarioService.listarUsuarios(null);
+    public ResponseEntity <Page<UsuarioListagemDTO>> listar(@PageableDefault(size = 10, sort = "nome") Pageable paginacao){
+        var page = usuarioService.listarUsuarios(paginacao);
         return ResponseEntity.ok(page);
     }
 

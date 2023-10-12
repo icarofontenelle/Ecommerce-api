@@ -5,7 +5,6 @@ package com.example.api.wine.services;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Service;
 
 import com.example.api.wine.dtos.usuarioDTO.UsuarioAtualizarDTO;
@@ -28,10 +27,10 @@ public class UsuarioService {
         return usuarioRepository.save(usuario);
     }
 
-    public Page<UsuarioListagemDTO> listarUsuarios(@PageableDefault(size = 10, sort = {"nome"}) Pageable paginacao){
+    public Page<UsuarioListagemDTO> listarUsuarios(Pageable paginacao) {
         return usuarioRepository.findAllByAtivoTrue(paginacao).map(UsuarioListagemDTO::new);
     }
-
+    
     @Transactional
     public Usuario atualizarUsuario(UsuarioAtualizarDTO usuarioAtualizarDTO){
         var usuario = usuarioRepository.getReferenceById(usuarioAtualizarDTO.id());

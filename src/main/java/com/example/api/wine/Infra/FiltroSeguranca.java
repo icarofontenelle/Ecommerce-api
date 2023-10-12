@@ -22,6 +22,7 @@ public class FiltroSeguranca extends OncePerRequestFilter {
     @Autowired
     private TokenConfig tokenConfig;
 
+    @Autowired
     private AcessoRepository acessoRepository;
 
     @Override
@@ -44,9 +45,9 @@ public class FiltroSeguranca extends OncePerRequestFilter {
 
    
     private String recuperarToken(HttpServletRequest request) {
-        var authorizationHeader = request.getHeader("Authorization");
+        var authorizationHeader = request.getHeader("Authorization"); // pega o valor contido no cabeçalho authorization.
         if(authorizationHeader != null){
-            return authorizationHeader.replace("Bearer", "");     
+            return authorizationHeader.replace("Bearer ", "").trim();     
         }
         return null;
     }

@@ -24,7 +24,7 @@ public class AutenticacaoController {
     @Autowired
     AutenticacaoService autenticacaoService;
 
-     @Autowired
+    @Autowired
     private AuthenticationManager manager;
 
     @Autowired
@@ -32,7 +32,7 @@ public class AutenticacaoController {
 
     @PostMapping
     public ResponseEntity<TokenJwtDTO> efetuarLogin(@RequestBody @Valid AutenticacaoDTO autenticacaoDTO) {
-        var authenticationToken = new UsernamePasswordAuthenticationToken(autenticacaoDTO.login(), autenticacaoDTO.senha());
+        var authenticationToken = new UsernamePasswordAuthenticationToken(autenticacaoDTO.login().trim(), autenticacaoDTO.senha().trim());
         var authentication = manager.authenticate(authenticationToken);
 
         String tokenJWT = tokenConfig.gerarToken((Acesso) authentication.getPrincipal());
