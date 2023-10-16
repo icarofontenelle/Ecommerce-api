@@ -13,11 +13,13 @@ import com.example.api.wine.dtos.NotaCadastroDTO;
 import com.example.api.wine.dtos.NotaListagemDTO;
 import com.example.api.wine.services.NotaService;
 
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping("nota")
+@SecurityRequirement(name = "bearer-key")
 public class NotaController {
     
     @Autowired

@@ -3,15 +3,16 @@ package com.example.api.wine.services;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Service;
 
-import com.example.api.wine.dtos.ProdutoCadastroDTO;
-import com.example.api.wine.dtos.ProdutoListagemDTO;
+import com.example.api.wine.dtos.produtoDTO.ProdutoAtualizarDTO;
+import com.example.api.wine.dtos.produtoDTO.ProdutoCadastroDTO;
+import com.example.api.wine.dtos.produtoDTO.ProdutoListagemDTO;
 import com.example.api.wine.entities.Produto;
 import com.example.api.wine.repositories.ProdutoRepository;
 
 import jakarta.transaction.Transactional;
+import jakarta.validation.Valid;
 
 @Service
 public class ProdutoService {
@@ -20,16 +21,26 @@ public class ProdutoService {
     private ProdutoRepository produtoRepository;
 
     @Transactional
-    public void criarProduto(ProdutoCadastroDTO produtoCadastroDTO){
-        produtoRepository.save(new Produto(produtoCadastroDTO));
+    public Produto criarProduto(ProdutoCadastroDTO produtoCadastroDTO){
+        return produtoRepository.save(new Produto(produtoCadastroDTO));
     }
 
-    public Page<ProdutoListagemDTO> listarProdutos(@PageableDefault(size = 10, sort = {"nome"})Pageable paginacao){
+    public Page<ProdutoListagemDTO> listarProdutos(Pageable paginacao){
         return produtoRepository.findAll(paginacao).map(ProdutoListagemDTO::new);
     }
 
-    public void atualizarProduto(ProdutoCadastroDTO produtoAtualizarDTO){
+    @Transactional
+    public Produto atualizarProduto(@Valid ProdutoAtualizarDTO produtoAtualizarDTO){
         var produto = produtoRepository.getReferenceById(produtoAtualizarDTO.id());
         produto.atualizarInformacoes(produtoAtualizarDTO);
+        return produto;
     }
+
+    @Transactional
+    public void excluirProduto(Long id){
+        var produto = produtoRepository.getReferenceById(id);
+        produto.excluirInformacoes();
+    }
+
+    
 }

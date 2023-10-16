@@ -9,11 +9,13 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.api.wine.dtos.ItemPedidoCadastroDTO;
 import com.example.api.wine.services.ItemPedidoService;
 
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping("itempedido")
+@SecurityRequirement(name = "bearer-key")
 public class ItemPedidoController {
     
     @Autowired

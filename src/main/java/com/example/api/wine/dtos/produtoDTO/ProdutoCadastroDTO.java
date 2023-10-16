@@ -1,4 +1,5 @@
-package com.example.api.wine.dtos;
+package com.example.api.wine.dtos.produtoDTO;
+
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -20,5 +21,6 @@ public record ProdutoCadastroDTO (
     
     @NotNull
     Integer qtd_estoque) {
+
 
 }

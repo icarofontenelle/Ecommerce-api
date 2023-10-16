@@ -1,6 +1,7 @@
 package com.example.api.wine.entities;
 
-import com.example.api.wine.dtos.ProdutoCadastroDTO;
+import com.example.api.wine.dtos.produtoDTO.ProdutoAtualizarDTO;
+import com.example.api.wine.dtos.produtoDTO.ProdutoCadastroDTO;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -21,6 +22,7 @@ import lombok.NoArgsConstructor;
 public class Produto {
     
     public Produto(ProdutoCadastroDTO dados_produto) {
+        this.ativo = true;
         this.nome = dados_produto.nome();
         this.preco = dados_produto.preco();
         this.descricao = dados_produto.descricao();
@@ -36,8 +38,10 @@ public class Produto {
     private String descricao; 
     private String imagem; 
     private Integer qtd_estoque;
+
+    private Boolean ativo;
     
-    public void atualizarInformacoes(ProdutoCadastroDTO produtoAtualizarDTO) {
+    public void atualizarInformacoes(ProdutoAtualizarDTO produtoAtualizarDTO) {
         if(produtoAtualizarDTO.nome() != null) {
             this.nome = produtoAtualizarDTO.nome();
         }
@@ -52,6 +56,10 @@ public class Produto {
         }
         if(produtoAtualizarDTO.qtd_estoque() != null) {
             this.qtd_estoque = produtoAtualizarDTO.qtd_estoque();
-        }
+        }   
     }
+    
+    public void excluirInformacoes() {
+            this.ativo = false;
+           }    
 }

@@ -13,11 +13,13 @@ import com.example.api.wine.dtos.PedidoCadastroDTO;
 import com.example.api.wine.dtos.PedidoListagemDTO;
 import com.example.api.wine.services.PedidoService;
 
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping("pedido")
+@SecurityRequirement(name = "bearer-key")
 public class PedidoController {
  
      @Autowired

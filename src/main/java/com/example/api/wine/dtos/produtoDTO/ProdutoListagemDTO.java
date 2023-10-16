@@ -1,4 +1,4 @@
-package com.example.api.wine.dtos;
+package com.example.api.wine.dtos.produtoDTO;
 
 import com.example.api.wine.entities.Produto;
 

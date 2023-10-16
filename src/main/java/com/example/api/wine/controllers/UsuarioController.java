@@ -22,10 +22,12 @@ import com.example.api.wine.dtos.usuarioDTO.UsuarioDetalhamentoDTO;
 import com.example.api.wine.dtos.usuarioDTO.UsuarioListagemDTO;
 import com.example.api.wine.services.UsuarioService;
 
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping("usuario")
+@SecurityRequirement(name = "bearer-key")
 public class UsuarioController {
 
     @Autowired
