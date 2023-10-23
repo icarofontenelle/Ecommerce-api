@@ -1,4 +1,4 @@
-package com.example.api.wine.Infra;
+package com.example.api.wine.Infra.exceptions;
 
 import java.util.List;
 
@@ -53,6 +53,11 @@ public class TratadorDeError {
     @ExceptionHandler(Exception.class)
     public ResponseEntity <String> tratarErro500(Exception ex) {
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Erro: " +ex.getLocalizedMessage());
+    }
+   
+    @ExceptionHandler(ValidacaoException.class)
+    public ResponseEntity <String> tratarErroRegraDeNegocio(ValidacaoException ex) {
+        return ResponseEntity.badRequest().body(ex.getMessage());
     }
 
     
